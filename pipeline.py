@@ -198,45 +198,45 @@ if program_selection == '1':
 
     if flow_generator_selection == "1":
         # run zeek on pcap files
-        # call_zeek(normal_directory_obj, output_normal_directory)
+        call_zeek(normal_directory_obj, output_normal_directory)
         call_zeek(attack_directory_obj, output_attack_directory)
 
-        # os.system("~/zeekScripts/ZeekToCSV.sh {}".format(output_normal_directory))
+        os.system("~/zeekScripts/ZeekToCSV.sh {}".format(output_normal_directory))
         os.system("~/zeekScripts/ZeekToCSV.sh {}".format(output_attack_directory))
 
         print("Combining CSVs")
-        # os.system("cd {} && "
-        #          "rm *.log && "
-        #          "awk 'FNR==1 && NR!=1 {{next}} {{print}}' *.csv > combined.csv".format(output_normal_directory))
-        # print("Normal CSVs combined")
+        os.system("cd {} && "
+                  "rm *.log && "
+                  "awk 'FNR==1 && NR!=1 {{next}} {{print}}' *.csv > combined.csv".format(output_normal_directory))
+        print("Normal CSVs combined")
         os.system("cd {} && "
                   "rm *.log && "
                   "awk 'FNR==1 && NR!=1 {{next}} {{print}}' *.csv > combined.csv".format(output_attack_directory))
         print("Attack CSVs combined")
     elif flow_generator_selection == "2":
         # run argus on pcap files
-        # call_argus(normal_directory_obj, output_normal_directory)
+        call_argus(normal_directory_obj, output_normal_directory)
         call_argus(attack_directory_obj, output_attack_directory)
 
-        # os.system("cd {} && "
-        #          "awk 'FNR==1 && NR!=1 {{next}} {{print}}' *.csv > combined.csv".format(output_normal_directory))
+        os.system("cd {} && "
+                  "awk 'FNR==1 && NR!=1 {{next}} {{print}}' *.csv > combined.csv".format(output_normal_directory))
 
         os.system("cd {} && "
                   "awk 'FNR==1 && NR!=1 {{next}} {{print}}' *.csv > combined.csv".format(output_attack_directory))
     elif flow_generator_selection == "3":
         # run tranalyzer on pcap files
-        # call_tranalyzer(normal_directory_obj, output_normal_directory)
+        call_tranalyzer(normal_directory_obj, output_normal_directory)
         call_tranalyzer(attack_directory_obj, output_attack_directory)
 
-        # os.chdir(output_normal_directory)./p
+        os.chdir(output_normal_directory)
         # delete non flow files
-        # os.system("find . -type f ! -name '*flows.txt' -exec rm -f {} +")
+        os.system("find . -type f ! -name '*flows.txt' -exec rm -f {} +")
 
         # run script to convert tab separated to comma separated
-        # os.system("cd ~ && ./tab_to_csv.sh {}".format(output_normal_directory))
+        os.system("cd ~ && ./tab_to_csv.sh {}".format(output_normal_directory))
 
         # combine all csv files together
-        # os.system("awk 'FNR==1 && NR!=1 {{next}} {{print}}' *flows.csv > combined.csv".format(output_normal_directory))
+        os.system("awk 'FNR==1 && NR!=1 {{next}} {{print}}' *flows.csv > combined.csv".format(output_normal_directory))
 
         # repeat above system calls for the attack directory
         os.chdir(os.path.expanduser('~') + "/{}".format(output_attack_directory))
